@@ -31,15 +31,41 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "USERS")
 @XmlRootElement
 @NamedQueries({
-     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")
-     ,@NamedQuery(name = "Users.findByUsernameAndPassword", query = "SELECT u FROM Users u WHERE u.username = :username AND u.password = :password")
+    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")
+    ,@NamedQuery(name = "Users.findByUsernameAndPassword", query = "SELECT u FROM Users u WHERE u.username = :username AND u.password = :password")
+    ,@NamedQuery(name = "Users.findByUsernameAndEmail", query = "SELECT u FROM Users u WHERE u.username = :username AND u.email = :email")
     , @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id")
     , @NamedQuery(name = "Users.findByLastname", query = "SELECT u FROM Users u WHERE u.lastname = :lastname")
     , @NamedQuery(name = "Users.findByFirstname", query = "SELECT u FROM Users u WHERE u.firstname = :firstname")
     , @NamedQuery(name = "Users.findByAddress", query = "SELECT u FROM Users u WHERE u.address = :address")
     , @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username")
+    , @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email")
     , @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password")})
 public class Users implements Serializable {
+
+    @Size(max = 20)
+    @Column(name = "GENDER")
+    private String gender;
+
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    @Size(max = 40)
+    @Column(name = "EMAIL")
+    private String email;
+    @Size(max = 25)
+    @Column(name = "CATONE")
+    private String catone;
+    @Size(max = 25)
+    @Column(name = "CATTWO")
+    private String cattwo;
+    @Size(max = 25)
+    @Column(name = "CATTHREE")
+    private String catthree;
+    @Size(max = 25)
+    @Column(name = "CATFOUR")
+    private String catfour;
+    @Size(max = 25)
+    @Column(name = "CATFIVE")
+    private String catfive;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
     private Collection<Followed> followedCollection;
@@ -90,12 +116,20 @@ public class Users implements Serializable {
         this.id = id;
     }
 
-    public Users(String lastname, String firstname, String username, String password) {
+    public Users(String lastname, String firstname, String username, String password, String email, String gender,String catone,String cattwo, String catthree, String catfour, String catfive) {
         this.id = id;
         this.lastname = lastname;
         this.firstname = firstname;
         this.username = username;
         this.password = password;
+        this.email = email;
+        this.gender = gender;
+        this.catone = catone;
+        this.cattwo = cattwo;
+        this.catthree = catthree;
+        this.catfour = catfour;
+        this.catfive = catfive;
+        
     }
 
     public Integer getId() {
@@ -205,6 +239,62 @@ public class Users implements Serializable {
 
     public void setFollowedCollection(Collection<Followed> followedCollection) {
         this.followedCollection = followedCollection;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCatone() {
+        return catone;
+    }
+
+    public void setCatone(String catone) {
+        this.catone = catone;
+    }
+
+    public String getCattwo() {
+        return cattwo;
+    }
+
+    public void setCattwo(String cattwo) {
+        this.cattwo = cattwo;
+    }
+
+    public String getCatthree() {
+        return catthree;
+    }
+
+    public void setCatthree(String catthree) {
+        this.catthree = catthree;
+    }
+
+    public String getCatfour() {
+        return catfour;
+    }
+
+    public void setCatfour(String catfour) {
+        this.catfour = catfour;
+    }
+
+    public String getCatfive() {
+        return catfive;
+    }
+
+    public void setCatfive(String catfive) {
+        this.catfive = catfive;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
     
 }

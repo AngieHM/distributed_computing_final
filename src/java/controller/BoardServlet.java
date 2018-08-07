@@ -6,12 +6,16 @@
 package controller;
 
 import entity.Boards;
+import entity.Followed;
+import entity.Notifications;
 import entity.Users;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.ServletException;
@@ -21,6 +25,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import logic.BoardsRepository;
+import logic.NotificationRepo;
 import logic.crudOperationBoard;
 import sun.misc.IOUtils;
 
@@ -37,7 +43,10 @@ public class BoardServlet extends HttpServlet {
     
     @EJB
     crudOperationBoard crudBoard;
-    
+    @EJB
+    NotificationRepo notification;
+    @EJB
+    BoardsRepository boardRepo;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -85,6 +94,14 @@ public class BoardServlet extends HttpServlet {
         File FileSaveDir = new File(savePath);
         
         part.write(savePath + File.separator);*/
+        Date date = new Date();
+        notification.savetoDataBase(new Notifications(date,user.getId()));
+        
+        List<Boards> boardList = boardRepo.getAll() ;
+        request.setAttribute("eList", boardList);
+        List<Followed> followList = boardRepo.getFollowed(user);
+        request.setAttribute("fList", followList);
+        request.getRequestDispatcher("/display_boards.jsp").forward(request,response);
         
     }
     

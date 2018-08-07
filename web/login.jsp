@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Register</title>
+        <title>Login</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -14,16 +14,22 @@ and open the template in the editor.
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
         <script src="js/sendRegister.js"></script>
+        <link rel="stylesheet" href="css/main.css" >
     </head>
-    <body>
+    <body class="register">
         <center>
             <div class="jumbotron text-center">
                 <form id="form1" action="LoginServlet" method="post">
-                    <label for = "num2"><b>Username</b></label>
-                    <input id="username" type="text" name ="username"><br><br>
-                    <label for = "num2"><b>Password</b></label>
-                    <input id="password" type="text" name ="password"><br><br>
-                    <input id="submit" type="submit" value="submit" class="btn btn-primary">
+                    <div class="input_fields" style="width:50%; padding-bottom: 30px;">
+                        <img src="pics/logo.png" style="width:70px; margin-bottom: 2px"><br>
+                        <label for = "num2">Username</label><br>
+                        <input id="username" type="text" name ="username"><br><br>
+                        <label for = "num2">Email</label><br>
+                        <input id="email" type="text" name="email"><br><br>
+                        <input style="padding: 1rem ;background: #256F5B;" id="submit" type="submit" value="Login" class="btn btn-primary"><br><br>
+                        <a href="googleSign.jsp" style="padding: 1rem 5.6rem; border-radius:.25rem; background: #256F5B; text-align: center; color: white; text-decoration: none; width: 30%;">Google Signin</a><br><br><br>
+                        <a href="index.jsp" style="padding: 1rem 7rem; border-radius:.25rem; background: #256F5B; text-align: center; color: white; text-decoration: none; width: 30%;">Register</a>
+                    </div>
                     </div>
                 </form>
             </div>

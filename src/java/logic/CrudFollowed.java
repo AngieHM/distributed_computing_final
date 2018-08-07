@@ -30,4 +30,10 @@ public class CrudFollowed {
         getEntityManager().persist(follow);
 
     }
+    
+    public void deleteFromDataBase(int followedId){
+         Followed follow = em.find(Followed.class, followedId);
+         em.remove(follow);
+
+    }
 }

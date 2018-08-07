@@ -10,13 +10,16 @@ import entity.Followed;
 import entity.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import logic.BoardsRepository;
 import logic.CrudFollowed;
+import logic.RegisterValidation;
 
 /**
  *
@@ -25,6 +28,10 @@ import logic.CrudFollowed;
 public class FollowServlet extends HttpServlet {
     @EJB
     CrudFollowed follow;
+    @EJB
+    RegisterValidation registerValidation;
+    @EJB
+    BoardsRepository boardsRepository;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,7 +46,21 @@ public class FollowServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Boards board = (Boards)session.getAttribute("board");
         Users user = (Users) session.getAttribute("user");
-        follow.savetoDataBase(new Followed(board,user));
+        Followed follows = registerValidation.findByBoardandUser(user,board);
+        if(follows != null)
+        { 
+            
+            List<Followed> followList = boardsRepository.getFollowed(user);
+            request.setAttribute("fList", followList);
+            request.getRequestDispatcher("/display_boards.jsp").forward(request,response);
+        }
+        else
+        {
+            follow.savetoDataBase(new Followed(board,user));
+            List<Followed> followList = boardsRepository.getFollowed(user);
+            request.setAttribute("fList", followList);
+            request.getRequestDispatcher("/display_boards.jsp").forward(request,response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

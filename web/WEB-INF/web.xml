@@ -36,6 +36,42 @@
         <servlet-name>RegisterGoogle</servlet-name>
         <servlet-class>controller.RegisterGoogle</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UnfollowServlet</servlet-name>
+        <servlet-class>controller.UnfollowServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowServlet</servlet-name>
+        <servlet-class>controller.ShowServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserBoards</servlet-name>
+        <servlet-class>controller.UserBoards</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Profile</servlet-name>
+        <servlet-class>controller.Profile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterChange</servlet-name>
+        <servlet-class>controller.RegisterChange</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserFollow</servlet-name>
+        <servlet-class>controller.UserFollow</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FollowUsers</servlet-name>
+        <servlet-class>controller.FollowUsers</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>controller.Logout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserUnfollow</servlet-name>
+        <servlet-class>controller.UserUnfollow</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Registering</servlet-name>
         <url-pattern>/RegisterController</url-pattern>
@@ -71,6 +107,42 @@
     <servlet-mapping>
         <servlet-name>RegisterGoogle</servlet-name>
         <url-pattern>/RegisterGoogle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UnfollowServlet</servlet-name>
+        <url-pattern>/UnfollowServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowServlet</servlet-name>
+        <url-pattern>/ShowServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserBoards</servlet-name>
+        <url-pattern>/UserBoards</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Profile</servlet-name>
+        <url-pattern>/Profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterChange</servlet-name>
+        <url-pattern>/RegisterChange</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserFollow</servlet-name>
+        <url-pattern>/UserFollow</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FollowUsers</servlet-name>
+        <url-pattern>/FollowUsers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserUnfollow</servlet-name>
+        <url-pattern>/UserUnfollow</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

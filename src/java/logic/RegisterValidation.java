@@ -5,6 +5,8 @@
  */
 package logic;
 
+import entity.Boards;
+import entity.Followed;
 import entity.Users;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -35,4 +37,55 @@ public class RegisterValidation {
         return null;
     }
 
+            
+            
+    public Users findByUsername(String username) {
+        try {
+            Object rawUser = em.createNamedQuery("Users.findByUsername")
+                    .setParameter("username", username)
+                    .getSingleResult();
+            if(rawUser instanceof Users) {
+                Users u = (Users)rawUser;
+                return u;
+            }
+        } catch(NoResultException e) {
+            return null;
+        }
+
+        return null;
+    }
+    
+    public Users findByEmail(String email) {
+        try {
+            Object rawUser = em.createNamedQuery("Users.findByEmail")
+                    .setParameter("email", email)
+                    .getSingleResult();
+            if(rawUser instanceof Users) {
+                Users u = (Users)rawUser;
+                return u;
+            }
+        } catch(NoResultException e) {
+            return null;
+        }
+
+        return null;
+    }
+    
+    public Followed findByBoardandUser(Users user, Boards board) {
+        
+        try {
+            Object rawUser = em.createNamedQuery("Followed.findByBoardAndUser")
+                    .setParameter("boardid", board)
+                    .setParameter("userid", user)    
+                    .getSingleResult();
+            if(rawUser instanceof Followed) {
+                Followed u = (Followed)rawUser;
+                return u;
+            }
+        } catch(NoResultException e) {
+            return null;
+        }
+
+        return null;
+    }
 }

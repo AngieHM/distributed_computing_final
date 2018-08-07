@@ -16,13 +16,15 @@ import logic.Register;
 import entity.Users;
 import logic.CRUDOperationCat;
 import logic.Categorie;
+import logic.RegisterValidation;
 
 /**
  *
  * @author Angela
  */
 public class RegisterController extends HttpServlet {
-    
+    @EJB
+    RegisterValidation registerValidation;
     @EJB
     private Register registerBean;
     @EJB
@@ -51,17 +53,29 @@ public class RegisterController extends HttpServlet {
         String lastname = request.getParameter("lastname");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String email = request.getParameter("email");
+        String gender = request.getParameter("gender");
         String romance = request.getParameter("romance");
         String comedy = request.getParameter("comedy");
         String action = request.getParameter("action");
         String thriller = request.getParameter("thriller");
+        String family = request.getParameter("family");
       
         
-        registerBean = new Register(firstname, lastname, username, password);
+        registerBean = new Register(firstname, lastname, username, password,email,gender,romance,comedy,action,thriller,family);
           
         user = registerBean.validation();
+        if(registerValidation.findByUsername(username)==null && registerValidation.findByEmail(email)==null){ 
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            crud.savetoDataBase(user);
+            
+        }
         
-        crud.savetoDataBase(user);
+        else{
+            String message = "Choose another username and email";
+            request.setAttribute("message", message);
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
+        }
         
         
         categorie = new Categorie(user, romance);

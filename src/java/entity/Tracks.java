@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Tracks.findAll", query = "SELECT t FROM Tracks t")
+    , @NamedQuery(name = "Tracks.findByBoard", query = "SELECT t FROM Tracks t WHERE t.board = :board")
     , @NamedQuery(name = "Tracks.findByTrackId", query = "SELECT t FROM Tracks t WHERE t.trackId = :trackId")
     , @NamedQuery(name = "Tracks.findByTitle", query = "SELECT t FROM Tracks t WHERE t.title = :title")
     , @NamedQuery(name = "Tracks.findByLinkp", query = "SELECT t FROM Tracks t WHERE t.linkp = :linkp")})

@@ -31,4 +31,9 @@ public class CRUDOperation {
         getEntityManager().persist(user);
 
     }
+    
+    public void updateDataBase(Users user){
+        getEntityManager().merge(user);
+
+    }
 }

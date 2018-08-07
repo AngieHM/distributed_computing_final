@@ -6,11 +6,13 @@
 package controller;
 
 import entity.Boards;
+import entity.Users;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import logic.BoardsRepository;
 import logic.DisplayBoards;
 
 /**
@@ -27,6 +30,8 @@ import logic.DisplayBoards;
 public class DisplayBoardsServlet extends HttpServlet {
     @EJB
     DisplayBoards displayBoards;
+    @EJB
+    BoardsRepository boardRepo;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,22 +45,23 @@ public class DisplayBoardsServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        Boards boards = displayBoards.board();
+        /*Boards boards = displayBoards.board();
         String title = boards.getTitle();
         String category = boards.getCategory();
         String image = boards.getImage();
+        int id = boards.getBoardId();
         String imagePath = "images/" + image;
         HttpSession session = request.getSession();
         session.setAttribute("board", boards);
         request.setAttribute("title",title);
         request.setAttribute("category",category);
         request.setAttribute("image",imagePath);
-        
-        
-        
+        request.setAttribute("id",String.valueOf(id));*/
         //RequestDispatcher view=request.getRequestDispatcher("display_boards.jsp");
         //RequestDispatcher view=request.getRequestDispatcher("/display_boards.jsp");
         //view.forward(request,response);
+        List<Boards> boardList = boardRepo.getAll() ;
+        request.setAttribute("eList", boardList);
         request.getRequestDispatcher("/boards.jsp").forward(request,response);
     }
 

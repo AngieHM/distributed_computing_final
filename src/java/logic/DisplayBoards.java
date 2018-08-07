@@ -6,6 +6,8 @@
 package logic;
 
 import entity.Boards;
+import entity.Followed;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -32,4 +34,5 @@ public class DisplayBoards {
         
         return board;
     }
+    
 }

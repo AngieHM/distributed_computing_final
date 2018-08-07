@@ -6,6 +6,8 @@
 package logic;
 
 import entity.Boards;
+import entity.Followed;
+import entity.Users;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -36,5 +38,47 @@ public class BoardsRepository {
         return null;
     }
         
+     public List<Followed> getFollowed(Users userid) {
+       return em.createNamedQuery("Followed.findByUser")
+                .setParameter("userid", userid)
+                .getResultList();
+    }
+     
+     public List<Boards> findByUser(Users userid) {
+       return em.createNamedQuery("Boards.findByUser")
+                .setParameter("userid", userid)
+                .getResultList();
+    }
+     
+    public Boards getById(int boardId) {
+        try {
+            Object rawBoard = em.createNamedQuery("Boards.findByBoardId")
+                    .setParameter("boardId", boardId)
+                    .getSingleResult();
+            if(rawBoard instanceof Boards) {
+                Boards u = (Boards)rawBoard;
+                return u;
+            }
+        } catch(NoResultException e) {
+            return null;
+        }
+
+        return null;
+    }
     
+      public void deleteFollow(int followedId) {
+        try {
+            Object rawBoard = em.createNamedQuery("Followed.deleteFollow")
+                    .setParameter("followedId", followedId);
+
+        } 
+        catch(NoResultException e) {
+
+        }
+    }
+      
+    public List<Boards> getAll() {
+       return em.createNamedQuery("Boards.findAll")
+                .getResultList();
+    }
 }

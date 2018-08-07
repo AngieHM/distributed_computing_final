@@ -4,37 +4,76 @@
  * and open the template in the editor.
  */
 
-function sendRegister(){
+function send(){
     var firstname = $("#firstname").val();
     var lastname = $("#lastname").val();
     var username = $("#username").val();
-    var password = $("#password").val();
+    var password = "pass";
+    var email = $("#email").val();
     
     var romance;
     var comedy;
     var action;
     var thriller;
+    var gender;
+    var family;
     
+    console.log(password);  
     if (document.getElementById('romance').checked) {
  
-        romance = document.getElementById('romance').value;
+        romance = "1";
         
         console.log(romance);
     }
+    else{
+        
+        romance = "0";
+    }
     if (document.getElementById('comedy').checked) {
  
-        comedy = document.getElementById('comedy').value;
+        comedy = "1";
+    }
+    else{
+        
+        comedy = "0";
     }
     if (document.getElementById('action').checked) {
  
-        action = document.getElementById('action').value;
+        action = "1";
+    }
+    else{
+        
+        action = "0";
     }
     if (document.getElementById('thriller').checked) {
  
-        action = document.getElementById('thriller').value;
+        thriller = "1";
     }
+    else{
+        
+        thriller = "0";
+        
+    }
+     if (document.getElementById('family').checked) {
  
-
+        family = "1";
+    }
+    else{
+        
+        family = "0";
+        
+    }
+     if (document.getElementById('female').checked) {
+ 
+        gender = document.getElementById('female').value;
+        
+    }
+    
+    else if (document.getElementById('male').checked) {
+ 
+        gender = document.getElementById('male').value;
+        
+    }
     //Calling servlet
     $.post("RegisterController",
     {
@@ -43,10 +82,14 @@ function sendRegister(){
         lastname : lastname,
         username : username,
         password : password,
+        email : email,
+        gender : gender,
         romance : romance,
         comedy: comedy,
         action : action,
-        thriller: thriller
+        thriller: thriller,
+        family:family
+        
         
         
     }, //It is not useful since we are computing values locally. However, it shows that we can receive the response from server. 

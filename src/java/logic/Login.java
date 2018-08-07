@@ -29,8 +29,8 @@ public class Login {
     {
     }
  
-    public Users login(String username, String password) {
-        Users user = userRepository.getByUsernameAndPassword(username, password);
+    public Users login(String username, String email) {
+        Users user = userRepository.getByUsernameAndEmail(username, email);
         if(user != null) {
             //logLogin(user);
             isVerified = true;

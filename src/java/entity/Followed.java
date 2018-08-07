@@ -28,6 +28,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Followed.findAll", query = "SELECT f FROM Followed f")
+    ,@NamedQuery(name = "Followed.findByBoardAndUser", query = "SELECT f FROM Followed f WHERE f.boardid = :boardid AND f.userid = :userid")
+    ,@NamedQuery(name = "Followed.deleteFollow", query = "DELETE FROM Followed f WHERE f.followedId = :followedId")
+    , @NamedQuery(name = "Followed.findByUser", query = "SELECT f FROM Followed f WHERE f.userid = :userid")
     , @NamedQuery(name = "Followed.findByFollowedId", query = "SELECT f FROM Followed f WHERE f.followedId = :followedId")})
 public class Followed implements Serializable {
 

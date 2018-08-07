@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Logins.findAll", query = "SELECT l FROM Logins l")
+    , @NamedQuery(name = "Logins.findByUser", query = "SELECT l FROM Logins l WHERE l.userId = :userId")
     , @NamedQuery(name = "Logins.findByLoginId", query = "SELECT l FROM Logins l WHERE l.loginId = :loginId")
     , @NamedQuery(name = "Logins.findByDate", query = "SELECT l FROM Logins l WHERE l.date = :date")})
 public class Logins implements Serializable {

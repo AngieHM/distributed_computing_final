@@ -5,6 +5,7 @@
  */
 package logic;
 
+import entity.Boards;
 import entity.Tracks;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -22,6 +23,12 @@ public class TrackRepository {
     
     public List<Tracks> getAll() {
        return em.createNamedQuery("Tracks.findAll")
+                .getResultList();
+    }
+    
+    public List<Tracks> findByBoard(Boards board) {
+       return em.createNamedQuery("Tracks.findByBoard")
+                .setParameter("board", board)
                 .getResultList();
     }
 }

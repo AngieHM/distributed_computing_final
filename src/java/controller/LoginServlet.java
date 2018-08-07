@@ -5,9 +5,15 @@
  */
 package controller;
 
+import entity.Followed;
+import entity.Followers;
+import entity.Notifications;
 import entity.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +21,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import logic.BoardsRepository;
+import logic.Followusers;
 import logic.Login;
+import logic.NotificationRepo;
+import logic.UserRepository;
 
 /**
  *
@@ -23,8 +33,16 @@ import logic.Login;
  */
 public class LoginServlet extends HttpServlet {
     @EJB
+    BoardsRepository boardsRep;
+    @EJB
     private Login login;
     private Users user;
+    @EJB
+    NotificationRepo notificationRepo;
+    @EJB
+    Followusers crudFollow;
+    @EJB
+    UserRepository userRepository;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,17 +55,36 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-  
+        Boolean notification = false;
         String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String email = request.getParameter("email");
        
-        user = login.login(username,password);
+        user = login.login(username,email);
         
         if(login.getVerified())
         {
+            String notif = "";
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            response.sendRedirect("display_boards.jsp");
+            Date date = new Date();
+            List<Notifications> notificationList =notificationRepo.getByDate(date);
+            List<String> nameList = new ArrayList<>();
+            for (int i=0; i< notificationList.size();i++){
+            int followerId =  notificationList.get(i).getAddedBy();
+            Followers follower = crudFollow.findByIds(followerId,user.getId());
+            if(follower!=null)
+            {
+                notification = true;
+                notif = Boolean.toString(notification);
+                String notFirst= userRepository.getById(followerId).getFirstname();
+                nameList.add(notFirst);
+            }
+            }
+            List<Followed> followList = boardsRep.getFollowed(user);
+            request.setAttribute("nameList", nameList);
+            request.setAttribute("fList", followList);
+            request.setAttribute("notification", notif);
+            request.getRequestDispatcher("/display_boards.jsp").forward(request,response);
             
         }
         

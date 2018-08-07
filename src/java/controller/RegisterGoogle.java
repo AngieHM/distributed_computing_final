@@ -41,9 +41,16 @@ public class RegisterGoogle extends HttpServlet {
             String lastname = request.getParameter("name");
             String username = "googleUser";
             String password = "googlePass";
+            String email = request.getParameter("email");
+            String gender = "foo";
+            String romance = "0";
+            String comedy = "0";
+            String action = "0";
+            String thriller = "0";
+            String family = "0";
             
             if(registerValidation.findByFirstname(firstname)==null){
-                crudOperation.savetoDataBase(new Users(firstname, lastname, username, password));
+                crudOperation.savetoDataBase(new Users(firstname, lastname, username, password,email,gender,romance,comedy,action,thriller,family));
             }
     }
 
