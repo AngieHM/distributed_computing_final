@@ -29,7 +29,16 @@
         </div>
         <div class="container-fluid">
         <%
-    List<Tracks> tracks = (List<Tracks>)request.getAttribute("eList");
+        List<Tracks> tracks = (List<Tracks>)request.getAttribute("eList");
+        if(tracks .isEmpty()){
+        %>
+            <p style="color:white;">No tracks added yet</p>
+            
+        <%
+        }
+        else
+        {
+        
     // do whatever you want with names
         String title = tracks.get(0).getTitle();
         for (int i=0; i<tracks.size();i++)
@@ -41,7 +50,7 @@
             <source src="tracks/<%=tracks.get(i).getLinkp()%>" type="audio/mpeg">
         </audio>
         </tr>
-        <%}%>
+        <%}}%>
         </div>
     </body>
 </html>

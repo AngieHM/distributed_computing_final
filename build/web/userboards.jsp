@@ -32,7 +32,6 @@
                 <a href="create_boards.jsp" style="font-size: 100px; width: 100%; background: transparent; text-decoration: none; text-align: center;color: white;">+</a>
             </div>
         </div>
-        <>
         <div class="container-fluid">
         <div class="row">
         <%
@@ -44,11 +43,18 @@
         %>
         <div class="card" style="width: 20rem;">
         <div class="card-body">  
-            <p width="119"><%=boards.get(i).getTitle()%></p>
+
+            <form action="ShowServlet" method="post">
+                <input type="hidden" name="boardId" id="boardId" value="<%=boards.get(i).getBoardId()%>">
+                <button type="submit" class="view"><%=boards.get(i).getTitle()%></button>
+            </form>
         </div>
         <div class="card-img-top">
             <img src="images/<%=boards.get(i).getImage()%>">
-            <p style="font-size: 50px; width: 100%; background: transparent; color: white;">+</p>
+            <form action="add_tracks.jsp" method="post">
+                <input type="hidden" name="boardId" id="boardId" value="<%=boards.get(i).getBoardId()%>">
+                <button style="font-size: 50px; width: 100%; background: transparent; color: white;" type="submit" class="view">+</button>
+            </form>
         </div>
         </div>
         <%}%>

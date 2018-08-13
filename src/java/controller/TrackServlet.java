@@ -10,6 +10,7 @@ import entity.Tracks;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -18,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import logic.BoardsRepository;
+import logic.TrackRepository;
 import logic.crudTracks;
 
 /**
@@ -32,6 +35,10 @@ import logic.crudTracks;
 public class TrackServlet extends HttpServlet {
     @EJB
     crudTracks crudTrack;
+    @EJB
+    TrackRepository trackRepo;
+    @EJB
+    BoardsRepository boardsRepository;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -47,10 +54,12 @@ public class TrackServlet extends HttpServlet {
         
         
         String title = request.getParameter("title");
+        //HttpSession session = request.getSession();
+        //Boards board = (Boards)session.getAttribute("board");
         HttpSession session = request.getSession();
-        Boards board = (Boards)session.getAttribute("board");
-
-
+        int boardId = Integer.parseInt((String)(session.getAttribute("boardId")));
+        Boards board = boardsRepository.getById(boardId);
+        
         Part part = request.getPart("audio");
         String fileName = extractFileName(part);
             // refines the fileName in case it is an absolute path
@@ -60,6 +69,10 @@ public class TrackServlet extends HttpServlet {
 
         
         crudTrack.savetoDataBase(new Tracks(title,board, fileName));
+        
+        List<Tracks> trackList = trackRepo.findByBoard(board) ;
+        request.setAttribute("eList", trackList);
+        request.getRequestDispatcher("/tracks.jsp").forward(request,response);
   
     }
     

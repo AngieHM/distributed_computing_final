@@ -40,6 +40,12 @@ public class Followusers {
                 .getResultList();
     }
     
+    public List<Followers> findByFollowed(int followerId) {
+       return em.createNamedQuery("Followers.findByFollowerId")
+                .setParameter("followerId", followerId)
+                .getResultList();
+    }
+     
      public Followers findByIds(int followerId, int followingId) {
          
          try {

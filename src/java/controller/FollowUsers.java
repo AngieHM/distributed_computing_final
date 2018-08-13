@@ -9,6 +9,8 @@ import entity.Followers;
 import entity.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logic.CRUDOperation;
 import logic.Followusers;
+import logic.UserRepository;
 
 /**
  *
@@ -25,6 +28,9 @@ import logic.Followusers;
 public class FollowUsers extends HttpServlet {
     @EJB
     private Followusers crudFollow;
+    
+    @EJB
+    UserRepository userRepository;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,9 +45,28 @@ public class FollowUsers extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
-        int followerId = user.getId();
-        int followingId = Integer.parseInt(request.getParameter("followingId"));
-        crudFollow.savetoDataBase(new Followers(followingId, followerId));
+        int followingId = user.getId();
+        int followerId = Integer.parseInt(request.getParameter("followingId"));
+        Followers follower = crudFollow.findByIds(followerId,followingId);
+        if(follower==null){
+            crudFollow.savetoDataBase(new Followers(followerId, followingId));
+        }
+        else{
+        
+        }
+        List<Users> userList = userRepository.findAll() ;
+        List<Followers> followList = crudFollow.findByUser(user.getId()) ;
+        List<Users> userF = new ArrayList<>();
+        for (int i=0; i<followList.size();i++){
+            Users u = userRepository.getById(followList.get(i).getFollowerId());
+            
+                    userF.add(u);
+        }
+        
+        request.setAttribute("eList", userList);
+        request.setAttribute("fList", userF);
+        request.getRequestDispatcher("/users.jsp").forward(request,response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

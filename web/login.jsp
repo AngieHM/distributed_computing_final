@@ -15,6 +15,8 @@ and open the template in the editor.
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
         <script src="js/sendRegister.js"></script>
         <link rel="stylesheet" href="css/main.css" >
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <meta name="google-signin-client_id" content="1035551989612-lf0aapld67ejeicji91nod6q27lpgmgm.apps.googleusercontent.com">
     </head>
     <body class="register">
         <center>
@@ -26,12 +28,39 @@ and open the template in the editor.
                         <input id="username" type="text" name ="username"><br><br>
                         <label for = "num2">Email</label><br>
                         <input id="email" type="text" name="email"><br><br>
-                        <input style="padding: 1rem ;background: #256F5B;" id="submit" type="submit" value="Login" class="btn btn-primary"><br><br>
-                        <a href="googleSign.jsp" style="padding: 1rem 5.6rem; border-radius:.25rem; background: #256F5B; text-align: center; color: white; text-decoration: none; width: 30%;">Google Signin</a><br><br><br>
+                        <input style="padding: 1rem ;background: #256F5B;" id="submit" type="submit" value="Login" class="btn btn-primary"><br>
+                        <div class="g-signin2" data-onsuccess="onSignIn" id="myP" ></div><br>
                         <a href="index.jsp" style="padding: 1rem 7rem; border-radius:.25rem; background: #256F5B; text-align: center; color: white; text-decoration: none; width: 30%;">Register</a>
+
                     </div>
                     </div>
                 </form>
             </div>
+       <script>   
+         function onSignIn(googleUser) {
+      // window.location.href='success.jsp';
+        var profile = googleUser.getBasicProfile();
+        var imagurl=profile.getImageUrl();
+        var name=profile.getName();
+        var email=profile.getEmail();
+        console.log(email);
+        $.post("RegisterGoogle",
+          {
+
+          name: name,
+          email : email
+
+
+          });
+   }
+   </script>
+   </script>
+   <button onclick="myFunction()">Sign Out</button>
+   <script>
+      function myFunction() {
+      gapi.auth2.getAuthInstance().disconnect();
+      location.reload();
+   }
+   </script>
     </body>
 </html>

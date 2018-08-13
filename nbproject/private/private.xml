@@ -20,6 +20,7 @@
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/UserFollow.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/TrackServlet.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/images/mother.jpg</file>
+            <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/MyUsers.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/entity/Categories.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/userboards.jsp</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/logic/Categorie.java</file>
@@ -28,6 +29,7 @@
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/login.jsp</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/logic/TrackRepository.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/js/sendRegister.js</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/logic/CrudFollowed.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/css/movies.css</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/entity/Tracks.java</file>
@@ -51,6 +53,8 @@
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/NewServlet.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/UserBoards.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/create_boards.jsp</file>
+            <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/myusers.jsp</file>
+            <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/Block.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/LoginServlet.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/profile.jsp</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/entity/Users.java</file>

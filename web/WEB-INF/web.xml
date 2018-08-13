@@ -72,6 +72,14 @@
         <servlet-name>UserUnfollow</servlet-name>
         <servlet-class>controller.UserUnfollow</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MyUsers</servlet-name>
+        <servlet-class>controller.MyUsers</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Block</servlet-name>
+        <servlet-class>controller.Block</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Registering</servlet-name>
         <url-pattern>/RegisterController</url-pattern>
@@ -143,6 +151,14 @@
     <servlet-mapping>
         <servlet-name>UserUnfollow</servlet-name>
         <url-pattern>/UserUnfollow</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyUsers</servlet-name>
+        <url-pattern>/MyUsers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Block</servlet-name>
+        <url-pattern>/Block</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

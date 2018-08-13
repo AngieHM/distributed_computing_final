@@ -18,10 +18,7 @@
 </head>
 <body>
    <div class="g-signin2" data-onsuccess="onSignIn" id="myP"></div>
-      <img id="myImg"><br>
-      <p id="name"></p>
-      <div id="status">
-   </div>
+  
    <script type="text/javascript">
       function onSignIn(googleUser) {
       // window.location.href='success.jsp';
@@ -30,21 +27,7 @@
       var name=profile.getName();
       var email=profile.getEmail();
        $(document).ready(function () {
-      $.post("RegisterGoogle",
-    {
-        
-        name: name,
-        email : email
-        
-        
-    }, //It is not useful since we are computing values locally. However, it shows that we can receive the response from server. 
-    function(data, status){
-        if (status === "success"){
-            console.log(name);
-
-        }
-
-    });
+       console.log(email);
     });
       document.getElementById("myImg").src = imagurl;
       document.getElementById("name").innerHTML = name;

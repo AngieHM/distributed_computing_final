@@ -70,6 +70,11 @@
                     <button type="submit" class="link">My boards</button>
                 </form>
             </li>
+            <li class="nav-item">
+                <form action="MyUsers" method="post">
+                    <button type="submit" class="link">My users</button>
+                </form>
+            </li>
             <li class="nav-item" style="float:right">
               <form action="Logout" method="post">
                     <button type="submit" class="link">Logout</button>
@@ -158,7 +163,58 @@
         
         
     <div class="container-fluid" style="background: #f5f5f5">
-    <p>Following</p>
+    <div class="row" style="text-align: center;">
+        <h3 style="text-align: center; margin: 0 auto;">Recommended</h3>
+    </div>
+    <div class="row">
+    
+    <%
+    List<Boards> catList = (List<Boards>)request.getAttribute("catList");
+// do whatever you want with names
+    if(catList.isEmpty())
+    {%>
+    <p style="color:#333;">No recommended boards</p>
+    <%
+     }
+    else{
+    for (int i=0; i<catList.size();i++)
+    {
+    %>
+
+    <div class="card" style="width:18.5rem;">
+        <div class="card-img-top">
+            <img src="images/<%=catList.get(i).getImage()%>" alt="image"/> 
+        </div>
+        <div class="card-body">
+            <form action="ShowServlet" method="post">
+                <input type="hidden" name="boardId" id="boardId" value="<%=catList.get(i).getBoardId()%>">
+                <button type="submit" class="view"><%=catList.get(i).getTitle()%></button>
+             </form>
+             <p><%=catList.get(i).getCategory()%></p>
+             <form action="FollowServlet" method="post">
+                <button type="submit">Follow</button>
+             </form>
+        </div>
+    </div>
+    <%}}%>
+    </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    <div class="row" style="text-align: center;">
+        <h3 style="text-align: center; margin: 0 auto;">Following</h3>
+    </div>
+    <div class="row">
+    
     <%
     List<Followed> followed = (List<Followed>)request.getAttribute("fList");
 // do whatever you want with names
@@ -166,12 +222,15 @@
     {
     %>
 
-    <div class="card" style="width:20rem;">
+    <div class="card" style="width:18.5rem;">
         <div class="card-img-top">
             <img src="images/<%=followed.get(i).getBoardid().getImage()%>" alt="image"/> 
         </div>
         <div class="card-body">
-            <p width="119"><%=followed.get(i).getBoardid().getTitle()%></p>
+            <form action="ShowServlet" method="post">
+                <input type="hidden" name="boardId" id="boardId" value="<%=followed.get(i).getBoardid().getBoardId()%>">
+                <button type="submit" class="view"><%=followed.get(i).getBoardid().getTitle()%></button>
+             </form>
             <form action="UnfollowServlet" method="post">
                 <input type="hidden" name="followedId" id="followedId" value="<%=followed.get(i).getFollowedId()%>">
                 <button type="submit">Unfollow</button>
@@ -179,8 +238,12 @@
         </div>
     </div>
     <%}%>
+    </div>
     </div>    
     <div class="container-fluid boards">
+        <div class="row" style="text-align: center;">
+        <h3 style="text-align: center; margin: 0 auto;">All boards</h3>
+        </div>
         <div class="row">
         <%
             session.setAttribute("user",session.getAttribute("user"));
@@ -194,14 +257,13 @@
         for (int i=0; i<boards.size();i++)
         {
         %>
-            <div class="card" style="width:20rem;">
+            <div class="card" style="width:18.5rem;">
                 <div class="card-img-top">
                    <img src="images/<%=boards.get(i).getImage()%>" alt="image"/> 
                 </div>
                 <div class="card-body">
-                    <p>Hello</p>
                     <form action="ShowServlet" method="post">
-                        <input type="hidden" name="boardId" id="boardId" value="${id}">
+                        <input type="hidden" name="boardId" id="boardId" value="<%=boards.get(i).getBoardId()%>">
                         <button type="submit" class="view"><%=boards.get(i).getTitle()%></button>
                     </form>
                     <p><%=boards.get(i).getCategory()%></p>

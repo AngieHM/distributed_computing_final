@@ -18,15 +18,16 @@ and open the template in the editor.
     </head>
     <body class="create">
         <%
-            session.setAttribute("board",session.getAttribute("board"));
+            String boardId = request.getParameter("boardId"); 
+            session.setAttribute("boardId", boardId);
  
         %>
         <center>
             <div class="jumbotron text-center">
                 <form id="form2" action= "TrackServlet" method="post" enctype="multipart/form-data">
-                    <label for="trackAudio"><b>Track title</b></label>
+                    <label for="trackAudio">Track title</label><br>
                     <input id="title" type="text" name="title" value="track title"><br><br>
-                    <label for="audio"><b>Upload audio</b></label>
+                    <label for="audio">Upload audio</label><br>
                     <input id="audio" type="file" name ="audio"><br><br>
                     <input id="submitB" type="submit" value="Create" class="btn btn-primary" onclick="">
                     </div>

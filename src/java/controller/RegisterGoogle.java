@@ -5,16 +5,28 @@
  */
 package controller;
 
+import entity.Boards;
+import entity.Followed;
+import entity.Followers;
+import entity.Notifications;
 import entity.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logic.BoardsRepository;
 import logic.CRUDOperation;
+import logic.Followusers;
+import logic.NotificationRepo;
 import logic.RegisterValidation;
+import logic.UserRepository;
 
 /**
  *
@@ -25,6 +37,14 @@ public class RegisterGoogle extends HttpServlet {
     RegisterValidation registerValidation;
     @EJB
     CRUDOperation crudOperation;
+    @EJB
+    BoardsRepository boardsRep;
+    @EJB
+    NotificationRepo notificationRepo;
+    @EJB
+    Followusers crudFollow;
+    @EJB
+    UserRepository userRepository;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,6 +57,7 @@ public class RegisterGoogle extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+            Boolean notification = false;
             String firstname = request.getParameter("name");
             String lastname = request.getParameter("name");
             String username = "googleUser";
@@ -49,8 +70,92 @@ public class RegisterGoogle extends HttpServlet {
             String thriller = "0";
             String family = "0";
             
-            if(registerValidation.findByFirstname(firstname)==null){
+            if(registerValidation.findByFirstname(firstname)==null && registerValidation.findByEmail(email)==null){
                 crudOperation.savetoDataBase(new Users(firstname, lastname, username, password,email,gender,romance,comedy,action,thriller,family));
+                String notif = "";
+            Users user = registerValidation.findByEmail(email);
+            System.out.println(user);
+            Date date = new Date();
+            List<Notifications> notificationList =notificationRepo.getByDate(date);
+            List<String> nameList = new ArrayList<>();
+            for (int i=0; i< notificationList.size();i++){
+            int followerId =  notificationList.get(i).getAddedBy();
+            Followers follower = crudFollow.findByIds(followerId,user.getId());
+            if(follower!=null)
+            {
+                notification = true;
+                notif = Boolean.toString(notification);
+                String notFirst= userRepository.getById(followerId).getFirstname();
+                nameList.add(notFirst);
+            }
+            }
+            List<Followed> followList = boardsRep.getFollowed(user);
+            List<Boards> catBoard = new ArrayList<>();
+
+            if(user.getCatone().equals("1")){
+                System.out.println(user.getCatone());
+                List<Boards> board = boardsRep.getByCategory("romance");
+                if(board.size()>0)
+                {
+                    for (int i=0; i<board.size();i++)
+                    {
+                        catBoard.add(board.get(i));
+                    }   
+                }
+            }
+            
+            if(user.getCattwo().equals("2")){
+                List<Boards> board = boardsRep.getByCategory("comedy");
+                if(board.size()>0)
+                {
+                    for (int i=0; i<board.size();i++)
+                    {
+                        catBoard.add(board.get(i));
+                    }   
+                }
+            }
+            
+            if(user.getCatthree().equals("3")){
+                List<Boards> board = boardsRep.getByCategory("action");
+                if(board.size()>0)
+                {
+                    for (int i=0; i<board.size();i++)
+                    {
+                        catBoard.add(board.get(i));
+                    }   
+                }
+            }
+            if(user.getCatfour().equals("4")){
+                List<Boards> board = boardsRep.getByCategory("thriller");
+                if(board.size()>0)
+                {
+                    for (int i=0; i<board.size();i++)
+                    {
+                        catBoard.add(board.get(i));
+                    }   
+                }
+            }
+            if(user.getCatfive().equals("5")){
+                List<Boards> board = boardsRep.getByCategory("family");
+                if(board.size()>0)
+                {
+                    for (int i=0; i<board.size();i++)
+                    {
+                        catBoard.add(board.get(i));
+                    }   
+                }
+            }
+            request.setAttribute("catList", catBoard);
+            request.setAttribute("nameList", nameList);
+            request.setAttribute("fList", followList);
+            request.setAttribute("notification", notif);
+            request.getRequestDispatcher("/display_boards.jsp").forward(request,response);
+            }
+            
+            else{
+                RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+                view.forward(request, response);
+            
             }
     }
 

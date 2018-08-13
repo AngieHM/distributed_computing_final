@@ -81,4 +81,10 @@ public class BoardsRepository {
        return em.createNamedQuery("Boards.findAll")
                 .getResultList();
     }
+    public List<Boards> getByCategory(String category) {
+       return em.createNamedQuery("Boards.findByCategory")
+                .setParameter("category", category)
+                .getResultList();
+    }
+    
 }

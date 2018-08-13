@@ -5,6 +5,7 @@
  */
 package controller;
 
+import entity.Boards;
 import entity.Followed;
 import entity.Followers;
 import entity.Notifications;
@@ -81,6 +82,62 @@ public class LoginServlet extends HttpServlet {
             }
             }
             List<Followed> followList = boardsRep.getFollowed(user);
+            List<Boards> catBoard = new ArrayList<>();
+
+            if(user.getCatone().equals("1")){
+                System.out.println(user.getCatone());
+                List<Boards> board = boardsRep.getByCategory("romance");
+                if(board.size()>0)
+                {
+                    for (int i=0; i<board.size();i++)
+                    {
+                        catBoard.add(board.get(i));
+                    }   
+                }
+            }
+            
+            if(user.getCattwo().equals("2")){
+                List<Boards> board = boardsRep.getByCategory("comedy");
+                if(board.size()>0)
+                {
+                    for (int i=0; i<board.size();i++)
+                    {
+                        catBoard.add(board.get(i));
+                    }   
+                }
+            }
+            
+            if(user.getCatthree().equals("3")){
+                List<Boards> board = boardsRep.getByCategory("action");
+                if(board.size()>0)
+                {
+                    for (int i=0; i<board.size();i++)
+                    {
+                        catBoard.add(board.get(i));
+                    }   
+                }
+            }
+            if(user.getCatfour().equals("4")){
+                List<Boards> board = boardsRep.getByCategory("thriller");
+                if(board.size()>0)
+                {
+                    for (int i=0; i<board.size();i++)
+                    {
+                        catBoard.add(board.get(i));
+                    }   
+                }
+            }
+            if(user.getCatfive().equals("5")){
+                List<Boards> board = boardsRep.getByCategory("family");
+                if(board.size()>0)
+                {
+                    for (int i=0; i<board.size();i++)
+                    {
+                        catBoard.add(board.get(i));
+                    }   
+                }
+            }
+            request.setAttribute("catList", catBoard);
             request.setAttribute("nameList", nameList);
             request.setAttribute("fList", followList);
             request.setAttribute("notification", notif);
