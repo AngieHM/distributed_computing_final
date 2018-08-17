@@ -55,6 +55,10 @@
                 <input type="hidden" name="boardId" id="boardId" value="<%=boards.get(i).getBoardId()%>">
                 <button style="font-size: 50px; width: 100%; background: transparent; color: white;" type="submit" class="view">+</button>
             </form>
+            <form action="DeleteBoard" method="post">
+                <input type="hidden" name="boardId1" id="boardId1" value="<%=boards.get(i).getBoardId()%>">
+                <button style="font-size: 50px; width: 100%; background: transparent; color: white;" type="submit" class="view">-</button>
+            </form>
         </div>
         </div>
         <%}%>

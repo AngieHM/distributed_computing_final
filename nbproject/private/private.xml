@@ -29,6 +29,7 @@
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/login.jsp</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/logic/TrackRepository.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/DeleteTrack.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/js/sendRegister.js</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/logic/CrudFollowed.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/css/movies.css</file>
@@ -55,6 +56,7 @@
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/create_boards.jsp</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/myusers.jsp</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/Block.java</file>
+            <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/DeleteBoard.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/LoginServlet.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/profile.jsp</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/entity/Users.java</file>

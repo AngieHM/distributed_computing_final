@@ -44,12 +44,16 @@
         for (int i=0; i<tracks.size();i++)
         {
         %>
-        <tr>
-        <td width="119"><%=tracks.get(i).getTitle()%></td>
-        <audio controls>
-            <source src="tracks/<%=tracks.get(i).getLinkp()%>" type="audio/mpeg">
-        </audio>
-        </tr>
+        <div class="col-md-3">
+            <p width="119"><%=tracks.get(i).getTitle()%></p>
+            <audio controls>
+                <source src="tracks/<%=tracks.get(i).getLinkp()%>" type="audio/mpeg">
+            </audio>
+            <form action="DeleteTrack" method="post">
+                <input type="hidden" name="trackId" id="trackId" value="<%=tracks.get(i).getTrackId()%>">
+                <button style="font-size: 50px; width: 100%; background: transparent; color: white;" type="submit" class="view">-</button>
+            </form>
+        </div>
         <%}}%>
         </div>
     </body>

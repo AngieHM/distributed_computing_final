@@ -87,4 +87,9 @@ public class BoardsRepository {
                 .getResultList();
     }
     
+     public void deleteFromDataBase(int boardId){
+         Boards board = em.find(Boards.class, boardId);
+         em.remove(board);
+
+    }
 }

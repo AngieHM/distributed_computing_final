@@ -24,6 +24,8 @@
 			crossorigin="anonymous">
 	</script>
         <link rel="stylesheet" href="css/movies.css">
+        <meta name="google-signin-client_id" content="1035551989612-lf0aapld67ejeicji91nod6q27lpgmgm.apps.googleusercontent.com">
+         
         <title>Welcome</title>
     </head>
     
@@ -80,12 +82,28 @@
                     <button type="submit" class="link">Logout</button>
               </form>
             </li>
-   
+            <li class="nav-item">
+              <button style="background: transparent; cursor: pointer; color: white; border:0;" onclick="signOut()">Sign Out</button>
+            </li>
           </ul>
         </div>
         </nav>
     </div>
-        
+    <script>
+    function signOut() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        console.log('User signed out.');
+        window.location="login.jsp";
+      });
+    }
+
+    function onLoad() {
+      gapi.load('auth2', function() {
+        gapi.auth2.init();
+      });
+    }
+  </script>
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -218,6 +236,12 @@
     <%
     List<Followed> followed = (List<Followed>)request.getAttribute("fList");
 // do whatever you want with names
+    if(followed.isEmpty())
+    {%>
+    <p style="color:#333;">No recommended boards</p>
+    <%
+     }
+    else{
     for (int i=0; i<followed.size();i++)
     {
     %>
@@ -237,7 +261,7 @@
             </form>
         </div>
     </div>
-    <%}%>
+    <%}}%>
     </div>
     </div>    
     <div class="container-fluid boards">
@@ -275,5 +299,6 @@
         <%}%>
         </div>
     </div>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
     </body>
 </html>

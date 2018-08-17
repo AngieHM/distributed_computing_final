@@ -80,6 +80,14 @@
         <servlet-name>Block</servlet-name>
         <servlet-class>controller.Block</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteBoard</servlet-name>
+        <servlet-class>controller.DeleteBoard</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteTrack</servlet-name>
+        <servlet-class>controller.DeleteTrack</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Registering</servlet-name>
         <url-pattern>/RegisterController</url-pattern>
@@ -159,6 +167,14 @@
     <servlet-mapping>
         <servlet-name>Block</servlet-name>
         <url-pattern>/Block</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteBoard</servlet-name>
+        <url-pattern>/DeleteBoard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteTrack</servlet-name>
+        <url-pattern>/DeleteTrack</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

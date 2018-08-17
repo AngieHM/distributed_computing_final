@@ -31,4 +31,10 @@ public class TrackRepository {
                 .setParameter("board", board)
                 .getResultList();
     }
+    
+    public void deleteFromDataBase(int trackId){
+         Tracks track = em.find(Tracks.class, trackId);
+         em.remove(track);
+
+    }
 }

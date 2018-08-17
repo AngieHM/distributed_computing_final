@@ -42,24 +42,15 @@ and open the template in the editor.
         var profile = googleUser.getBasicProfile();
         var imagurl=profile.getImageUrl();
         var name=profile.getName();
-        var email=profile.getEmail();
-        console.log(email);
-        $.post("RegisterGoogle",
-          {
-
-          name: name,
-          email : email
-
-
-          });
-   }
-   </script>
-   </script>
-   <button onclick="myFunction()">Sign Out</button>
-   <script>
-      function myFunction() {
-      gapi.auth2.getAuthInstance().disconnect();
-      location.reload();
+        var email=profile.getEmail();  
+          var form = $('<form action="RegisterGoogle " method="post">' +
+                          '<input type="text" name="name" value="' +
+                           name + '" />' + '<input type="text" name="email" value="' +
+                           email + '" />' +
+                                            
+                                                                '</form>');
+         $('body').append(form);
+         form.submit();
    }
    </script>
     </body>

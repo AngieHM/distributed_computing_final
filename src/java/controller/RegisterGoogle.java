@@ -21,6 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import logic.BoardsRepository;
 import logic.CRUDOperation;
 import logic.Followusers;
@@ -70,9 +71,7 @@ public class RegisterGoogle extends HttpServlet {
             String thriller = "0";
             String family = "0";
             
-            if(registerValidation.findByFirstname(firstname)==null && registerValidation.findByEmail(email)==null){
-                crudOperation.savetoDataBase(new Users(firstname, lastname, username, password,email,gender,romance,comedy,action,thriller,family));
-                String notif = "";
+                   String notif = "";
             Users user = registerValidation.findByEmail(email);
             System.out.println(user);
             Date date = new Date();
@@ -149,14 +148,23 @@ public class RegisterGoogle extends HttpServlet {
             request.setAttribute("nameList", nameList);
             request.setAttribute("fList", followList);
             request.setAttribute("notification", notif);
-            request.getRequestDispatcher("/display_boards.jsp").forward(request,response);
+            List<Boards> boardList = boardsRep.getAll() ;
+            request.setAttribute("eList", boardList);
+            
+            if(registerValidation.findByFirstname(firstname)==null && registerValidation.findByEmail(email)==null){
+                crudOperation.savetoDataBase(new Users(firstname, lastname, username, password,email,gender,romance,comedy,action,thriller,family));
+                RequestDispatcher view = request.getRequestDispatcher("/boards.jsp");
+                view.forward(request, response);
             }
             
             else{
-                RequestDispatcher view = request.getRequestDispatcher("index.jsp");
-                view.forward(request, response);
+                System.out.println("redirected");
+                HttpSession session = request.getSession(true);
+                request.getServletContext()
+               .getRequestDispatcher("/boards.jsp").forward(request, response);
             
             }
+            
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
