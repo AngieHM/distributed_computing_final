@@ -64,9 +64,10 @@ public class LoginServlet extends HttpServlet {
         
         if(login.getVerified())
         {
-            String notif = "";
+            //String notif = "";
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
+            /*
             Date date = new Date();
             List<Notifications> notificationList =notificationRepo.getByDate(date);
             List<String> nameList = new ArrayList<>();
@@ -140,7 +141,8 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("catList", catBoard);
             request.setAttribute("nameList", nameList);
             request.setAttribute("fList", followList);
-            request.setAttribute("notification", notif);
+            request.setAttribute("notification", notif);*/
+            request.setAttribute("user", user);
             request.getRequestDispatcher("/display_boards.jsp").forward(request,response);
             
         }

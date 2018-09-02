@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/js/updateBoard.js</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/logic/CRUDOperationCat.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/entity/Followed.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/logic/RegisterValidation.java</file>
@@ -34,20 +35,25 @@
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/logic/CrudFollowed.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/css/movies.css</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/entity/Tracks.java</file>
+            <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/pics/boards.jpg</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/BoardServlet.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/RegisterChange.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/RegisterController.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/logic/NotificationRepo.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/logic/UserRepository.java</file>
+            <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/ShowOthers.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/save_image.jsp</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/conf/persistence.xml</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/Profile.java</file>
+            <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/trackOthers.jsp</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/users.jsp</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/logic/crudOperationBoard.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/entity/Followers.java</file>
+            <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/UpdateServlet.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/css/main.css</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/UserUnfollow.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/add_tracks.jsp</file>
+            <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/update_tracks.jsp</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/UnfollowServlet.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/entity/Notifications.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/js/submitBoard.js</file>
@@ -65,16 +71,17 @@
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/RegisterGoogle.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/logic/BoardsRepository.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/logic/Followusers.java</file>
+            <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/UpdateTrack.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/pics/board.jpg</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/controller/DisplayBoardsServlet.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/logic/crudTracks.java</file>
+            <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/update_boards.jsp</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/googleSign.jsp</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/index.jsp</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/logic/CRUDOperation.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/logic/DisplayBoards.java</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/success.jsp</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/pics/profile.jpg</file>
-            <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/pics/boards.png</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/display_boards.jsp</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/web/tracks.jsp</file>
             <file>file:/C:/Users/Angela/Documents/NetBeansProjects/pinterestTry1/src/java/entity/Boards.java</file>

@@ -26,6 +26,7 @@
         <div class="container-fluid social">
             
         </div>
+        <a href="display_boards.jsp" style="text-decoration: none; text-align:center; background: transparent; color: white; margin-left:60px"><-Back</a>
         <div class="container-fluid">
             <h3 class="f">Following</h3>
              <%

@@ -45,7 +45,7 @@ public class Block extends HttpServlet {
         
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
-        int followingId= Integer.parseInt(request.getParameter("followingId"));
+        int followingId= Integer.parseInt(request.getParameter("followerId"));
         Followers follower = crudFollow.findByIds(user.getId(),followingId);
         int followersId = follower.getFollowersId();
         crudFollow.deleteFromDataBase(followersId);

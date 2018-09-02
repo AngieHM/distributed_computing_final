@@ -11,12 +11,18 @@ import entity.Notifications;
 import entity.Users;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
 import javax.ejb.EJB;
+import javax.servlet.ServletContext;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,11 +40,11 @@ import sun.misc.IOUtils;
  *
  * @author Angela
  */
-@MultipartConfig(
+/*@MultipartConfig(
                  location = "C:\\Users\\Angela\\Documents\\NetBeansProjects\\pinterestTry1\\web\\images",
                  fileSizeThreshold=1024*1024*2, // 2MB
                  maxFileSize=1024*1024*10,      // 10MB
-                 maxRequestSize=1024*1024*50)   // 50MB
+                 maxRequestSize=1024*1024*50)   // 50MB*/
 public class BoardServlet extends HttpServlet {
     
     @EJB
@@ -60,48 +66,74 @@ public class BoardServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        /*try (PrintWriter out = response.getWriter()) {
-             TODO output your page here. You may use following sample code.
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet BoardServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet BoardServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>"); 
-        }
-        */
+        
         String title = request.getParameter("title");
         String categorie = request.getParameter("categorie");
 
-
         Part part = request.getPart("file");
-        String fileName = extractFileName(part);
-            // refines the fileName in case it is an absolute path
-            
-        fileName = new File(fileName).getName();
-        part.write(fileName);
+        
+        if (title.equals("Board title") || part ==null){
+    
+             response.sendRedirect("create_boards.jsp");
+        }
+        
+        else
+        {      
+            String fileName = extractFileName(part);
 
-        HttpSession session = request.getSession();
-        Users user = (Users) session.getAttribute("user");
-        
-        crudBoard.savetoDataBase(new Boards(user,title,categorie,fileName));
-        
-        /*String filename = extractFileName(part);
-        String savePath = "C:\\Users\\Angela\\Documents\\NetBeansProjects\\pinterestTry1\\web\\images" + File.separator + filename;
-        File FileSaveDir = new File(savePath);
-        
-        part.write(savePath + File.separator);*/
-        Date date = new Date();
-        notification.savetoDataBase(new Notifications(date,user.getId()));
-        
-        List<Boards> boardList = boardRepo.getAll() ;
-        request.setAttribute("eList", boardList);
-        List<Followed> followList = boardRepo.getFollowed(user);
-        request.setAttribute("fList", followList);
-        request.getRequestDispatcher("/display_boards.jsp").forward(request,response);
+            String path = request.getServletContext().getRealPath("/");
+            String newPath = path.substring(0, path.length() - 11)+File.separator+"web"+File.separator+"images";
+
+            final Part filePart = request.getPart("file");
+
+            OutputStream out = null;
+            InputStream filecontent = null;
+            final PrintWriter writer = response.getWriter();
+
+            //try {
+                out = new FileOutputStream(new File(newPath + File.separator
+                        + fileName));
+                filecontent = filePart.getInputStream();
+
+                int read = 0;
+                final byte[] bytes = new byte[1024];
+
+                while ((read = filecontent.read(bytes)) != -1) {
+                    out.write(bytes, 0, read);
+                }
+
+           // } catch (FileNotFoundException fne) {
+
+
+           /* } finally {
+                if (out != null) {
+                    out.close();
+                }
+                if (filecontent != null) {
+                    filecontent.close();
+                }
+                if (writer != null) {
+                    writer.close();
+                }
+            }*/
+
+            HttpSession session = request.getSession();
+            Users user = (Users) session.getAttribute("user");
+
+            crudBoard.savetoDataBase(new Boards(user,title,categorie,fileName));
+
+
+            Date date = new Date();
+            notification.savetoDataBase(new Notifications(date,user.getId()));
+
+            /*List<Boards> boardList = boardRepo.getAll() ;
+            request.setAttribute("eList", boardList);
+            List<Followed> followList = boardRepo.getFollowed(user);
+            request.setAttribute("fList", followList);*/
+            request.setAttribute("user", user);
+            request.getRequestDispatcher("/display_boards.jsp").forward(request,response);  
+        }
+
         
     }
     

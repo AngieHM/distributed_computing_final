@@ -26,8 +26,9 @@
         <div class="container-fluid users">
             
         </div>
+        <a href="display_boards.jsp" style="text-decoration: none; text-align:center; background: transparent; color: white; margin-left:60px"><-Back</a>
         <div class="container-fluid">
-            <h3 class="f">Follers</h3>
+            <h3 class="f">Followers</h3>
              <%
         List<Users> followers= (ArrayList<Users>)request.getAttribute("followers");
         for (int i=0; i<followers.size();i++)
@@ -46,7 +47,7 @@
             <div class="col-md-3">
                <form action="Block" method="post">
                     <input type="hidden" name = "followerId" id="followerId" value="<%=followers.get(i).getId()%>">
-                    <button type="submit" class="link" style="color:#333">Block</button>
+                    <button type="submit" class="link" style="color:white;background:red;">Block</button>
                 </form>
             </div>
         </div>

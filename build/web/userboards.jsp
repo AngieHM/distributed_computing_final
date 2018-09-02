@@ -21,12 +21,14 @@
 			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
 			crossorigin="anonymous">
 	</script>
+        <script src="https://use.fontawesome.com/e24e292945.js"></script>
         <link rel="stylesheet" href="css/movies.css">
         <title>My boards</title>
     </head>
     <body>
         <div class="container-fluid boardss">
         </div>
+        <a href="display_boards.jsp" style="text-decoration: none; text-align:center; background: transparent; color: white; margin-left:60px"><-Back</a>
         <div class="container-fluid">
             <div class="row">
                 <a href="create_boards.jsp" style="font-size: 100px; width: 100%; background: transparent; text-decoration: none; text-align: center;color: white;">+</a>
@@ -42,22 +44,28 @@
         {
         %>
         <div class="card" style="width: 20rem;">
+        
+        <div class="card-img-top">
+            <img src="images/<%=boards.get(i).getImage()%>">
+        </div>
         <div class="card-body">  
 
             <form action="ShowServlet" method="post">
                 <input type="hidden" name="boardId" id="boardId" value="<%=boards.get(i).getBoardId()%>">
                 <button type="submit" class="view"><%=boards.get(i).getTitle()%></button>
             </form>
-        </div>
-        <div class="card-img-top">
-            <img src="images/<%=boards.get(i).getImage()%>">
-            <form action="add_tracks.jsp" method="post">
+                     <form action="add_tracks.jsp" method="post" style="background: white;">
                 <input type="hidden" name="boardId" id="boardId" value="<%=boards.get(i).getBoardId()%>">
-                <button style="font-size: 50px; width: 100%; background: transparent; color: white;" type="submit" class="view">+</button>
+                <button style="font-size: 50px; width: 100%; background: transparent; color: #333;" type="submit" class="view">+</button>
             </form>
+            
             <form action="DeleteBoard" method="post">
                 <input type="hidden" name="boardId1" id="boardId1" value="<%=boards.get(i).getBoardId()%>">
-                <button style="font-size: 50px; width: 100%; background: transparent; color: white;" type="submit" class="view">-</button>
+                <button style="font-size: 50px; width: 100%; background: transparent; color: #333;" type="submit" class="view">-</button>
+            </form>
+            <form action="update_boards.jsp" method="post" style="background: white;">
+                <input type="hidden" name="boardId2" id="boardId2" value="<%=boards.get(i).getBoardId()%>">
+                <button style="font-size: 30px; width: 100%; background: transparent; color: #333;" type="submit" class="view"><i class="fa fa-refresh" aria-hidden="true"></i></button>
             </form>
         </div>
         </div>

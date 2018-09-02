@@ -10,6 +10,7 @@ import entity.Tracks;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -36,5 +37,21 @@ public class TrackRepository {
          Tracks track = em.find(Tracks.class, trackId);
          em.remove(track);
 
+    }
+    
+    public Tracks getById(int trackId) {
+        try {
+            Object rawBoard = em.createNamedQuery("Tracks.findByTrackId")
+                    .setParameter("trackId", trackId)
+                    .getSingleResult();
+            if(rawBoard instanceof Tracks) {
+                Tracks u = (Tracks)rawBoard;
+                return u;
+            }
+        } catch(NoResultException e) {
+            return null;
+        }
+
+        return null;
     }
 }

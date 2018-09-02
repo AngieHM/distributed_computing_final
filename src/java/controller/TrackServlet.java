@@ -8,7 +8,10 @@ package controller;
 import entity.Boards;
 import entity.Tracks;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.ejb.EJB;
@@ -27,11 +30,11 @@ import logic.crudTracks;
  *
  * @author Angela
  */
-@MultipartConfig(
+/*@MultipartConfig(
                  location = "C:\\Users\\Angela\\Documents\\NetBeansProjects\\pinterestTry1\\web\\tracks",
                  fileSizeThreshold=1024*1024*2, // 2MB
                  maxFileSize=1024*1024*10,      // 10MB
-                 maxRequestSize=1024*1024*50)   // 50MB
+                 maxRequestSize=1024*1024*50)   // 50MB*/
 public class TrackServlet extends HttpServlet {
     @EJB
     crudTracks crudTrack;
@@ -62,10 +65,34 @@ public class TrackServlet extends HttpServlet {
         
         Part part = request.getPart("audio");
         String fileName = extractFileName(part);
-            // refines the fileName in case it is an absolute path
+
+        if (title.equals("track title") || part ==null){
+    
+             response.sendRedirect("add_tracks.jsp");
+        }
+        
+        else
+        { 
             
-        fileName = new File(fileName).getName();
-        part.write(fileName);
+        String path = request.getServletContext().getRealPath("/");
+        String newPath = path.substring(0, path.length() - 11)+File.separator+"web"+File.separator+"tracks";
+        
+
+        OutputStream out = null;
+        InputStream filecontent = null;
+        final PrintWriter writer = response.getWriter();
+
+        //try {
+            out = new FileOutputStream(new File(newPath + File.separator
+                    + fileName));
+            filecontent = part.getInputStream();
+
+            int read = 0;
+            final byte[] bytes = new byte[1024];
+
+            while ((read = filecontent.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
 
         
         crudTrack.savetoDataBase(new Tracks(title,board, fileName));
@@ -73,6 +100,8 @@ public class TrackServlet extends HttpServlet {
         List<Tracks> trackList = trackRepo.findByBoard(board) ;
         request.setAttribute("eList", trackList);
         request.getRequestDispatcher("/tracks.jsp").forward(request,response);
+        
+        }
   
     }
     

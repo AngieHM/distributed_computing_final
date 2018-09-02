@@ -68,7 +68,7 @@ public class RegisterController extends HttpServlet {
         if(registerValidation.findByUsername(username)==null && registerValidation.findByEmail(email)==null){ 
             request.getRequestDispatcher("/login.jsp").forward(request, response);
             crud.savetoDataBase(user);
-            
+            response.sendRedirect("login.jsp");
         }
         
         else{

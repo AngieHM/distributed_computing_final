@@ -75,6 +75,11 @@ function send(){
         
     }
     //Calling servlet
+    if (username === '' || email === '' || firstname === '' ) {
+        alert("Please all fileds must be filled");
+        console.log("please fill ");
+    }
+    else{
     $.post("RegisterController",
     {
         
@@ -101,4 +106,5 @@ function send(){
 
     });
     //do some stuff
+    }
 }

@@ -39,4 +39,9 @@ public class crudTracks {
        
     }
     }
+    
+    public void updateDataBase(Tracks track){
+        getEntityManager().merge(track);
+
+    }
 }

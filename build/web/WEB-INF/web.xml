@@ -7,6 +7,12 @@
     <servlet>
         <servlet-name>BoardServlet</servlet-name>
         <servlet-class>controller.BoardServlet</servlet-class>
+        <multipart-config>
+            <location></location>
+            <max-file-size>20848820</max-file-size>
+            <max-request-size>418018841</max-request-size>
+            <file-size-threshold>1048576</file-size-threshold>
+        </multipart-config>
     </servlet>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
@@ -23,6 +29,12 @@
     <servlet>
         <servlet-name>TrackServlet</servlet-name>
         <servlet-class>controller.TrackServlet</servlet-class>
+        <multipart-config>
+            <location/>
+            <max-file-size>20848820</max-file-size>
+            <max-request-size>418018841</max-request-size>
+            <file-size-threshold>1048576</file-size-threshold>
+        </multipart-config>
     </servlet>
     <servlet>
         <servlet-name>DisplayTracks</servlet-name>
@@ -87,6 +99,30 @@
     <servlet>
         <servlet-name>DeleteTrack</servlet-name>
         <servlet-class>controller.DeleteTrack</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateServlet</servlet-name>
+        <servlet-class>controller.UpdateServlet</servlet-class>
+        <multipart-config>
+            <location></location>
+            <max-file-size>20848820</max-file-size>
+            <max-request-size>418018841</max-request-size>
+            <file-size-threshold>1048576</file-size-threshold>
+        </multipart-config>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowOthers</servlet-name>
+        <servlet-class>controller.ShowOthers</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateTrack</servlet-name>
+        <servlet-class>controller.UpdateTrack</servlet-class>
+        <multipart-config>
+            <location/>
+            <max-file-size>20848820</max-file-size>
+            <max-request-size>418018841</max-request-size>
+            <file-size-threshold>1048576</file-size-threshold>
+        </multipart-config>
     </servlet>
     <servlet-mapping>
         <servlet-name>Registering</servlet-name>
@@ -175,6 +211,18 @@
     <servlet-mapping>
         <servlet-name>DeleteTrack</servlet-name>
         <url-pattern>/DeleteTrack</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateServlet</servlet-name>
+        <url-pattern>/UpdateServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowOthers</servlet-name>
+        <url-pattern>/ShowOthers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateTrack</servlet-name>
+        <url-pattern>/UpdateTrack</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

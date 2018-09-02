@@ -4,6 +4,7 @@
     Author     : Angela
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="entity.Boards"%>
 <%@page import="java.util.List"%>
 <%@page import="entity.Followed"%>
@@ -44,21 +45,47 @@
               </form>
             </li>
             <li class="nav-item">
-                <%
-                String notification = request.getParameter("notif");
-            // do whatever you want with names
-                if(notification=="true"){
+              <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: 0;background: transparent;margin-top: -4px;">Notifications</button>
+                    <div class="dropdown-menu" id ="drop-menuss" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Notifications</a>
+                    </div>
+              </div>
+            </li>
+            <%    
+                List<String> nameList = (List<String>)request.getAttribute("nameList");
+                if(nameList.isEmpty()){
+            %>
+                <p>Notifications</p>
+            <%
+                }
+                else{
                     %>
                     <script>
+                     
                         alert("You have a new notification");
-                    </script>
+                    </script>    
+                    <%
+                     
+                    
+                     for (int i=0; i<nameList.size();i++)
+                     
+                     {%>
+                         
+                      <script>
+                        var name= "<%=nameList.get(i)%>";
+                        var aCreate = document.createElement('a');
+                        aCreate.className = 'dropdown-item';
+                        var node = document.createTextNode(name+ 'Added a new board');
+                        aCreate.appendChild(node);
+                        var elements = document.getElementById("drop-menuss");
+                        elements.appendChild(aCreate);
+                      </script>
+                    
                     <%
                      }
+                     }
                     %>
-              <form action="" method="post">
-                    <button type="submit" class="link">Notifications</button>
-              </form>
-            </li>
             <li class="nav-item">
                 <a href="settings.jsp"><button type="submit" class="link">Settings</button></a>
             </li>
@@ -77,11 +104,6 @@
                     <button type="submit" class="link">My users</button>
                 </form>
             </li>
-            <li class="nav-item" style="float:right">
-              <form action="Logout" method="post">
-                    <button type="submit" class="link">Logout</button>
-              </form>
-            </li>
             <li class="nav-item">
               <button style="background: transparent; cursor: pointer; color: white; border:0;" onclick="signOut()">Sign Out</button>
             </li>
@@ -91,11 +113,24 @@
     </div>
     <script>
     function signOut() {
+      if(gapi.auth2){
       var auth2 = gapi.auth2.getAuthInstance();
       auth2.signOut().then(function () {
-        console.log('User signed out.');
-        window.location="login.jsp";
+        console.log(auth2);
+        window.location = "login.jsp";
       });
+        }
+        
+      else{
+          
+        var form = $('<form action="Logout" method="post">' +
+                          '<input type="text" name="name" value="' +
+                           name + '" />' +
+                                            
+                                                                '</form>');
+         $('body').append(form);
+         form.submit();  
+      }
     }
 
     function onLoad() {
@@ -103,6 +138,31 @@
         gapi.auth2.init();
       });
     }
+    /*function signOut() {
+     if(gapi.auth2)
+        {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+            window.location="login.jsp";
+            });
+        }
+        
+      else{
+          
+          var form = $('<form action="Logout" method="post">' +
+                          '<input type="text" name="name" value="' +
+                           name + '" />' +
+                                            
+                                                                '</form>');
+         $('body').append(form);
+         form.submit();
+      }
+    function onLoad() {
+      gapi.load('auth2', function() {
+        gapi.auth2.init();
+      });
+    }
+}*/
   </script>
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
@@ -204,7 +264,7 @@
             <img src="images/<%=catList.get(i).getImage()%>" alt="image"/> 
         </div>
         <div class="card-body">
-            <form action="ShowServlet" method="post">
+            <form action="ShowOthers" method="post">
                 <input type="hidden" name="boardId" id="boardId" value="<%=catList.get(i).getBoardId()%>">
                 <button type="submit" class="view"><%=catList.get(i).getTitle()%></button>
              </form>
@@ -238,7 +298,7 @@
 // do whatever you want with names
     if(followed.isEmpty())
     {%>
-    <p style="color:#333;">No recommended boards</p>
+    <p style="color:#333;">No followed boards</p>
     <%
      }
     else{
@@ -251,7 +311,7 @@
             <img src="images/<%=followed.get(i).getBoardid().getImage()%>" alt="image"/> 
         </div>
         <div class="card-body">
-            <form action="ShowServlet" method="post">
+            <form action="ShowOthers" method="post">
                 <input type="hidden" name="boardId" id="boardId" value="<%=followed.get(i).getBoardid().getBoardId()%>">
                 <button type="submit" class="view"><%=followed.get(i).getBoardid().getTitle()%></button>
              </form>
@@ -286,12 +346,13 @@
                    <img src="images/<%=boards.get(i).getImage()%>" alt="image"/> 
                 </div>
                 <div class="card-body">
-                    <form action="ShowServlet" method="post">
+                    <form action="ShowOthers" method="post">
                         <input type="hidden" name="boardId" id="boardId" value="<%=boards.get(i).getBoardId()%>">
                         <button type="submit" class="view"><%=boards.get(i).getTitle()%></button>
                     </form>
                     <p><%=boards.get(i).getCategory()%></p>
                     <form action="FollowServlet" method="post">
+                    <input type="hidden" name="boardIds" id="boardIds" value="<%=boards.get(i).getBoardId()%>">
                     <button type="submit">Follow</button>
                     </form>
                 </div>

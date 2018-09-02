@@ -156,6 +156,11 @@ and open the template in the editor.
 
         }
         //Calling servlet
+        if (username === '' || email === '' || firstname === '' || lastname === '' ) {
+        alert("Please all fileds must be filled");
+        
+        }
+        else{
         $.post("RegisterController",
         {
 
@@ -182,6 +187,7 @@ and open the template in the editor.
 
         });
         //do some stuff
+    }
     }
 
     </script>

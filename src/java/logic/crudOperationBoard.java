@@ -30,4 +30,9 @@ public class crudOperationBoard {
         getEntityManager().persist(board);
 
     }
+    
+         public void updateDataBase(Boards board){
+        getEntityManager().merge(board);
+
+    }
 }

@@ -48,8 +48,8 @@ public class UnfollowServlet extends HttpServlet {
         Users user = (Users) session.getAttribute("user");
         int followedId = Integer.parseInt(request.getParameter("followedId"));
         follow.deleteFromDataBase(followedId);
-        List<Followed> followList = boardsRepository.getFollowed(user);
-        request.setAttribute("fList", followList);
+        //List<Followed> followList = boardsRepository.getFollowed(user);
+        //request.setAttribute("fList", followList);
         request.getRequestDispatcher("/display_boards.jsp").forward(request,response);
     }
 

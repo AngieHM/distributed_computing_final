@@ -21,12 +21,14 @@
 			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
 			crossorigin="anonymous">
 	</script>
+        <script src="https://use.fontawesome.com/e24e292945.js"></script>
         <link rel="stylesheet" href="css/movies.css">
         <title>Welcome</title>
     </head>
     <body>
         <div class="container-fluid tracks">
         </div>
+         <a href="display_boards.jsp" style="text-decoration: none; text-align:center; background: transparent; color: white; margin-left:60px"><-Back</a>
         <div class="container-fluid">
         <%
         List<Tracks> tracks = (List<Tracks>)request.getAttribute("eList");
@@ -51,8 +53,13 @@
             </audio>
             <form action="DeleteTrack" method="post">
                 <input type="hidden" name="trackId" id="trackId" value="<%=tracks.get(i).getTrackId()%>">
-                <button style="font-size: 50px; width: 100%; background: transparent; color: white;" type="submit" class="view">-</button>
+                <button style="font-size: 50px; width: 100%; background: transparent; color: white;border:0;" type="submit" class="view">-</button>
             </form>
+            <form action="update_tracks.jsp" method="post">
+                <input type="hidden" name="trackId2" id="trackId2" value="<%=tracks.get(i).getTrackId()%>">
+                <button style="font-size: 30px; width: 100%; background: transparent; color: white;border:0;" type="submit" class="view"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+            </form>
+            
         </div>
         <%}}%>
         </div>
